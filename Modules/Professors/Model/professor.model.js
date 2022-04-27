@@ -1,6 +1,7 @@
-const mongoose = require('mongoose');
-const bcrypt = require('bcrypt');
-
+//Global modules:
+const mongoose = require('mongoose')
+const bcrypt = require('bcrypt')
+//the Schema:
 const professorSchema = new mongoose.Schema({
     firstName: { type: String, required: true },
     lastName: { type: String, required: true },
@@ -8,12 +9,14 @@ const professorSchema = new mongoose.Schema({
     phoneNumber: { type: Number, required: true },
     role: { type: String, default: 'professor' },
     password: { type: String, required: true },
-});
+})
 
+//password encryption:
 professorSchema.pre('save', async function (next) {
-    //save is the name of the method that will do the change before it
-    this.password = await bcrypt.hash(this.password, 5);
-});
-const professorModel = mongoose.model('professor', professorSchema);
+    this.password = await bcrypt.hash(this.password, 5)
+})
 
-module.exports = professorModel;
+//create the model:
+const professorModel = mongoose.model('professor', professorSchema)
+
+module.exports = professorModel
