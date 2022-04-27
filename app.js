@@ -1,0 +1,17 @@
+const express = require('express')
+const connection = require('./Configuration/config')
+const app = express()
+const bp = require('body-parser')
+
+require('dotenv').config()
+const Students = require('./Modules/Students/Routes/students.routes')
+const Professors = require('./Modules/Professors/Routes/professor.routes')
+app.use(bp.json())
+app.use(bp.urlencoded({ extended: false }))
+
+app.use(Students)
+app.use(Professors)
+app.use(express.json())
+app.get('/', (req, res) => res.send('Hello World!'))
+app.listen(process.env.PORT, () => console.log(`Server is running ........`))
+connection()
