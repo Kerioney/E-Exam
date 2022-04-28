@@ -1,7 +1,13 @@
-const adminModel = require('../Model/admin.model')
+//Global Modules:
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 
+//local models:
+const adminModel = require('../Model/admin.model')
+const studentModel = require('../../Students/Model/students.model')
+const professorModel = require('../../Professors/Model/professor.model')
+
+//Register Controllers:
 let signupAdmin = async (req, res) => {
     const { name, email, password, confirmPassword } = req.body
     try {
@@ -50,4 +56,22 @@ let loginAdmin = async (req, res) => {
     }
 }
 
-module.exports = { signupAdmin, loginAdmin }
+//Students Controllers:
+let getAllStudents = async (req, res) => {
+    let students = await studentModel
+        .find({})
+        .select(
+            '-_id firstName lastName email phoneNumber department academicYear'
+        )
+    res.status(200).json(students)
+}
+
+//Professor Controllers:
+let getAllProfessor = async (req, res) => {
+    let professors = await professorModel
+        .find({})
+        .select('-_id firstName lastName email phoneNumber')
+    res.status(200).json(professors)
+}
+
+module.exports = { signupAdmin, loginAdmin, getAllStudents, getAllProfessor }
