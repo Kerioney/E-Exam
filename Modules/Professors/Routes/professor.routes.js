@@ -10,8 +10,8 @@ const {
 } = require('../Controller/professor.controller')
 
 //validation:
-const isAuth = require('../../../Configuration/isAuth')
-const validator = require('../../../Validator/common.valid')
+const isAuth = require('../../../Common/common.isAuth')
+const validator = require('../../../Common/common.valid')
 const {
     signupProfessorSchema,
     loginProfessorSchema,

@@ -10,14 +10,14 @@ const {
 } = require('../Controller/admin.controls')
 
 //validation:
-const validator = require('../../../Validator/common.valid')
+const validator = require('../../../Common/common.valid')
 const {
     signupAdminSchema,
     loginAdminSchema,
 } = require('../validation/admin.valid')
 
 //Authorization:
-const isAuth = require('../../../Configuration/isAuth')
+const isAuth = require('../../../Common/common.isAuth')
 const {
     GET_ALL_STUDENT,
     GET_ALL_PROFESSOR,
