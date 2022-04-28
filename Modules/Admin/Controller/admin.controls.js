@@ -60,10 +60,31 @@ let loginAdmin = async (req, res) => {
 let getAllStudents = async (req, res) => {
     let students = await studentModel
         .find({})
-        .select(
-            '-_id firstName lastName email phoneNumber department academicYear'
-        )
+        .select(' firstName lastName email phoneNumber department academicYear')
     res.status(200).json(students)
+}
+
+let updateStudents = async (req, res) => {
+    const {
+        firstName,
+        lastName,
+        email,
+        phoneNumber,
+        department,
+        academicYear,
+    } = req.body
+    const id = req.params._id
+    await studentModel.findByIdAndUpdate(
+        { _id: id },
+        { firstName, lastName, email, phoneNumber, department, academicYear }
+    )
+    res.status(200).json({ message: 'Updated' })
+}
+
+let deleteStudent = async (req, res) => {
+    const id = req.params._id
+    await studentModel.findByIdAndDelete({ _id: id })
+    res.status(200).json({ message: 'Deleted' })
 }
 
 //Professor Controllers:
@@ -74,4 +95,11 @@ let getAllProfessor = async (req, res) => {
     res.status(200).json(professors)
 }
 
-module.exports = { signupAdmin, loginAdmin, getAllStudents, getAllProfessor }
+module.exports = {
+    signupAdmin,
+    loginAdmin,
+    getAllStudents,
+    getAllProfessor,
+    updateStudents,
+    deleteStudent,
+}

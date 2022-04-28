@@ -1,10 +1,7 @@
 const jwt = require('jsonwebtoken')
-// auth schema
 const rbac = require('../Auth/RBAC/rbac')
-// // we get the rbc that we created
 
 module.exports = (endpoint) => {
-    //the parameter that will take it in the function
     return async (req, res, next) => {
         let bareToken = req.headers.authorization
 
