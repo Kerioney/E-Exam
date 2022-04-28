@@ -7,6 +7,8 @@ const {
     loginAdmin,
     getAllStudents,
     getAllProfessor,
+    updateStudents,
+    deleteStudent,
 } = require('../Controller/admin.controls')
 
 //validation:
@@ -21,11 +23,20 @@ const isAuth = require('../../../Common/common.isAuth')
 const {
     GET_ALL_STUDENT,
     GET_ALL_PROFESSOR,
+    UPDATE_STUDENT,
+    DELETE_STUDENT,
 } = require('../../../Auth/endpoints')
 
-//endpoints
+//endpoints:
+//Register:
 app.post('/signupAdmin', validator(signupAdminSchema), signupAdmin) // will not be used in FrontEnd
 app.post('/loginAdmin', validator(loginAdminSchema), loginAdmin)
+
+//Students:
 app.get('/getAllStudents', isAuth(GET_ALL_STUDENT), getAllStudents)
+app.put('/updateStudents/:_id', isAuth(UPDATE_STUDENT), updateStudents)
+app.delete('/deleteStudent/:_id', isAuth(DELETE_STUDENT), deleteStudent)
+
+//Professors:
 app.get('/getAllProfessor', isAuth(GET_ALL_PROFESSOR), getAllProfessor)
 module.exports = app

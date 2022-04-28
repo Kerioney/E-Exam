@@ -1,7 +1,11 @@
-const professorModel = require('../Model/professor.model')
+//Global Modules:
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 
+//local models:
+const professorModel = require('../Model/professor.model')
+
+//Register:
 let signupProfessor = async (req, res) => {
     const {
         firstName,
@@ -27,13 +31,14 @@ let signupProfessor = async (req, res) => {
 
             await newProfessor
                 .save()
-                .then(res.status(200).json({ message: 'added' }))
+                .then(res.status(200).json({ message: 'Done' }))
         }
     } catch (error) {
         res.status(500).json({ message: 'something went wrong' })
     }
 }
 
+//Login:
 let loginProfessor = async (req, res) => {
     const { email, password } = req.body
     try {
@@ -64,6 +69,7 @@ let loginProfessor = async (req, res) => {
     }
 }
 
+//Profile:
 let professorProfile = async (req, res) => {
     let profile = await professorModel
         .findById({ _id: req.user._id })
