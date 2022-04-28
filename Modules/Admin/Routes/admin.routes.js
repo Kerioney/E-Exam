@@ -6,9 +6,11 @@ const {
     signupAdmin,
     loginAdmin,
     getAllStudents,
-    getAllProfessor,
     updateStudents,
     deleteStudent,
+    getAllProfessor,
+    updateProfessor,
+    deleteProfessor,
 } = require('../Controller/admin.controls')
 
 //validation:
@@ -25,6 +27,8 @@ const {
     GET_ALL_PROFESSOR,
     UPDATE_STUDENT,
     DELETE_STUDENT,
+    UPDATE_PROFESSOR,
+    DELETE_PROFESSOR,
 } = require('../../../Auth/endpoints')
 
 //endpoints:
@@ -39,4 +43,7 @@ app.delete('/deleteStudent/:_id', isAuth(DELETE_STUDENT), deleteStudent)
 
 //Professors:
 app.get('/getAllProfessor', isAuth(GET_ALL_PROFESSOR), getAllProfessor)
+app.put('/updateProfessor/:_id', isAuth(UPDATE_PROFESSOR), updateProfessor)
+app.delete('/deleteProfessor/:_id', isAuth(DELETE_PROFESSOR), deleteProfessor)
+
 module.exports = app
