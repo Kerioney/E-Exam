@@ -91,15 +91,32 @@ let deleteStudent = async (req, res) => {
 let getAllProfessor = async (req, res) => {
     let professors = await professorModel
         .find({})
-        .select('-_id firstName lastName email phoneNumber')
+        .select(' firstName lastName email phoneNumber')
     res.status(200).json(professors)
+}
+let updateProfessor = async (req, res) => {
+    const { firstName, lastName, email, phoneNumber } = req.body
+    const id = req.params._id
+    await professorModel.findByIdAndUpdate(
+        { _id: id },
+        { firstName, lastName, email, phoneNumber }
+    )
+    res.status(200).json({ message: 'Updated' })
+}
+
+let deleteProfessor = async (req, res) => {
+    const id = req.params._id
+    await professorModel.findByIdAndDelete({ _id: id })
+    res.status(200).json({ message: 'Deleted' })
 }
 
 module.exports = {
     signupAdmin,
     loginAdmin,
     getAllStudents,
-    getAllProfessor,
     updateStudents,
     deleteStudent,
+    getAllProfessor,
+    updateProfessor,
+    deleteProfessor,
 }
