@@ -6,7 +6,7 @@ const PROFESSOR_PROFILE = 'professor:PROFESSOR_PROFILE'
 const UPDATE_PROFESSOR = 'admin:UPDATE_PROFESSOR'
 const DELETE_PROFESSOR = 'admin:DELETE_PROFESSOR'
 
-//Admin Endpoints:
+// Admin Endpoints:
 const GET_ALL_STUDENT = 'admin:GET_ALL_STUDENT'
 const GET_ALL_PROFESSOR = 'admin:GET_ALL_PROFESSOR'
 const UPDATE_STUDENT = 'admin:UPDATE_STUDENT'

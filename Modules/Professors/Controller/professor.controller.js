@@ -1,6 +1,8 @@
 //Global Modules:
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
+const nodemailer = require('nodemailer')
+process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = 0
 
 //local models:
 const professorModel = require('../Model/professor.model')
@@ -16,23 +18,60 @@ let signupProfessor = async (req, res) => {
         confirmPassword,
     } = req.body
 
-    try {
-        let professor = await professorModel.findOne({ email })
-        if (professor) {
-            res.status(400).json({ message: 'The email is already exist' })
-        } else {
-            const newProfessor = new professorModel({
-                firstName,
-                lastName,
-                email,
-                password,
-                phoneNumber,
-            })
+    //verify email:
+    let professor = await professorModel.findOne({ email })
 
-            await newProfessor
-                .save()
-                .then(res.status(200).json({ message: 'Done' }))
-        }
+    if (professor) {
+        res.status(400).json({ message: 'The email is already exist' })
+    } else {
+        //Token:
+        let token = jwt.sign(
+            { email, firstName, lastName, password, phoneNumber },
+            'HHH'
+        )
+        //Create transport:
+        let transporter = nodemailer.createTransport({
+            service: 'gmail',
+            auth: {
+                user: process.env.USER,
+                pass: process.env.PASS,
+            },
+        })
+        //send the mail
+        await transporter.sendMail({
+            from: `${email}`,
+            to: `"Fares El-Kerioney" <${process.env.USER}> `,
+            subject: ' Verify Professor',
+            html: `Dr. ${firstName} ${lastName} want to register with the email: ${email} 
+            <br> 
+            <a href='http://localhost:4200/verifyProfessor?token=${token}' target='_blank'> Click here </a>to confirm the registration`,
+        })
+
+        res.status(200).json({
+            message: `Thanks for signup Dr.${firstName}The admin will confirm your registration soon`,
+        })
+    }
+}
+
+//verify the Professor:
+let verifyProfessor = async (req, res) => {
+    try {
+        //the Token:
+        let { token } = req.query
+        let decoded = jwt.verify(token, 'HHH')
+        //Signup:
+        const newProfessor = new professorModel({
+            firstName: decoded.firstName,
+            lastName: decoded.lastName,
+            email: decoded.email,
+            password: decoded.password,
+            phoneNumber: decoded.phoneNumber,
+        })
+        await newProfessor.save().then(
+            res.status(200).json({
+                message: 'The professor registration is completed',
+            })
+        )
     } catch (error) {
         res.status(500).json({ message: 'something went wrong' })
     }
@@ -78,4 +117,9 @@ let professorProfile = async (req, res) => {
     res.status(200).json(profile)
 }
 
-module.exports = { signupProfessor, loginProfessor, professorProfile }
+module.exports = {
+    signupProfessor,
+    loginProfessor,
+    professorProfile,
+    verifyProfessor,
+}
