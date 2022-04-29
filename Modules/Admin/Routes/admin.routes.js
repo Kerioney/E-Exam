@@ -1,37 +1,50 @@
 //Global Modules
 const app = require('express').Router()
 
-//Controllers:
+//*Controllers:
+
+//Admin:
+const { signupAdmin, loginAdmin } = require('../Controller/admin.controls')
+
+//Students:
 const {
-    signupAdmin,
-    loginAdmin,
     getAllStudents,
     updateStudents,
     deleteStudent,
+} = require('../Controller/admin.controls')
+
+//Professors:
+const {
     getAllProfessor,
     updateProfessor,
     deleteProfessor,
 } = require('../Controller/admin.controls')
 
-//validation:
+//*validation:
 const validator = require('../../../Common/common.valid')
 const {
     signupAdminSchema,
     loginAdminSchema,
 } = require('../validation/admin.valid')
 
-//Authorization:
+//*Authorization:
 const isAuth = require('../../../Common/common.isAuth')
+//STUDENT:
 const {
     GET_ALL_STUDENT,
-    GET_ALL_PROFESSOR,
     UPDATE_STUDENT,
     DELETE_STUDENT,
+} = require('../../../Auth/endpoints')
+
+//PROFESSOR:
+const {
+    GET_ALL_PROFESSOR,
     UPDATE_PROFESSOR,
     DELETE_PROFESSOR,
 } = require('../../../Auth/endpoints')
 
-//endpoints:
+//*endpoints:
+
 //Register:
 app.post('/signupAdmin', validator(signupAdminSchema), signupAdmin) // will not be used in FrontEnd
 app.post('/loginAdmin', validator(loginAdminSchema), loginAdmin)

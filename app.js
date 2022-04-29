@@ -15,7 +15,7 @@ app.use(bp.urlencoded({ extended: false }))
 app.use(Students)
 app.use(Professors)
 app.use(Admin)
-app.use(express.json())
+// app.use(express.json())
 
 app.get('/', (req, res) => res.send('Hello World!'))
 app.listen(process.env.PORT, () => console.log(`Server is running ........`))

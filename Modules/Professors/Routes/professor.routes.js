@@ -7,6 +7,7 @@ const {
     signupProfessor,
     loginProfessor,
     professorProfile,
+    verifyProfessor,
 } = require('../Controller/professor.controller')
 
 //validation:
@@ -16,8 +17,7 @@ const {
     signupProfessorSchema,
     loginProfessorSchema,
 } = require('../Validation/professors.valid')
-//Auth
-//Professor Auth
+//Auth:
 const { PROFESSOR_PROFILE } = require('../../../Auth/endpoints')
 
 //endpoints:
@@ -25,4 +25,5 @@ const { PROFESSOR_PROFILE } = require('../../../Auth/endpoints')
 app.post('/signupProfessor', validator(signupProfessorSchema), signupProfessor)
 app.post('/loginProfessor', validator(loginProfessorSchema), loginProfessor)
 app.get('/professorProfile', isAuth(PROFESSOR_PROFILE), professorProfile)
+app.get('/verifyProfessor', verifyProfessor)
 module.exports = app
