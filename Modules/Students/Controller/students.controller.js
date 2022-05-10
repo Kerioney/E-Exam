@@ -35,7 +35,7 @@ let signupStudent = async (req, res) => {
 
             await newStudent
                 .save()
-                .then(res.status(200).json({ message: 'Done' }))
+                .then(res.status(201).json({ message: 'Done' }))
         }
     } catch (error) {
         res.status(500).json({ message: 'something went wrong' })
