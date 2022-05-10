@@ -17,6 +17,6 @@ app.use(Professors)
 app.use(Admin)
 // app.use(express.json())
 
-app.get('/', (req, res) => res.send('Api is working....'))
+app.get('/', (req, res) => res.send('Hello World!'))
 app.listen(process.env.PORT, () => console.log(`Server is running ........`))
 connection()

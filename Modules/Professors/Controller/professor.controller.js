@@ -6,7 +6,6 @@ process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = 0
 
 //local models:
 const professorModel = require('../Model/professor.model')
-const examModel = require('../Model/exam.model')
 
 //Register:
 let signupProfessor = async (req, res) => {
@@ -48,7 +47,7 @@ let signupProfessor = async (req, res) => {
             <a href='http://localhost:4200/verifyProfessor?token=${token}' target='_blank'> Click here </a>to confirm the registration`,
         })
 
-        res.status(202).json({
+        res.status(200).json({
             message: `Thanks for signup Dr.${firstName}The admin will confirm your registration soon`,
         })
     }
@@ -69,7 +68,7 @@ let verifyProfessor = async (req, res) => {
             phoneNumber: decoded.phoneNumber,
         })
         await newProfessor.save().then(
-            res.status(201).json({
+            res.status(200).json({
                 message: 'The professor registration is completed',
             })
         )
@@ -93,8 +92,6 @@ let loginProfessor = async (req, res) => {
                         role: professorValid.role,
                         _id: professorValid._id,
                         email: professorValid.email,
-                        fName: professorValid.firstName,
-                        lName: professorValid.lastName,
                     },
                     'HHH'
                 )
@@ -119,44 +116,10 @@ let professorProfile = async (req, res) => {
 
     res.status(200).json(profile)
 }
-//exam:
-let addExam = async (req, res) => {
-    try {
-        const {
-            subjectName,
-            examScore,
-            passingScore,
-            timeInMin,
-            department,
-            level,
-        } = req.body
-        const professorName = 'Dr ' + req.user.fName + req.user.lName
-        console.log(req.user)
-        const professorId = req.user._id
-        const newExam = await new examModel({
-            subjectName,
-            examScore,
-            passingScore,
-            professorName,
-            professorId,
-            timeInMin,
-            department,
-            level,
-        })
-        newExam.save().then(
-            res.status(201).json({
-                message: 'Done',
-            })
-        )
-    } catch (error) {
-        res.status(500).json({ message: 'Something Went Wrong' }).log(error)
-    }
-}
 
 module.exports = {
     signupProfessor,
     loginProfessor,
     professorProfile,
     verifyProfessor,
-    addExam,
 }

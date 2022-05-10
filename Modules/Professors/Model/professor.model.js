@@ -1,7 +1,6 @@
 //Global modules:
 const mongoose = require('mongoose')
 const bcrypt = require('bcrypt')
-
 //the Schema:
 const professorSchema = new mongoose.Schema({
     firstName: { type: String, required: true },

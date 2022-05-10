@@ -5,7 +5,6 @@ const STUDENT_PROFILE = 'student:STUDENT_PROFILE'
 const PROFESSOR_PROFILE = 'professor:PROFESSOR_PROFILE'
 const UPDATE_PROFESSOR = 'admin:UPDATE_PROFESSOR'
 const DELETE_PROFESSOR = 'admin:DELETE_PROFESSOR'
-const ADD_EXAM = 'professor:ADD_EXAM'
 
 // Admin Endpoints:
 const GET_ALL_STUDENT = 'admin:GET_ALL_STUDENT'
@@ -22,5 +21,4 @@ module.exports = {
     GET_ALL_PROFESSOR,
     UPDATE_PROFESSOR,
     DELETE_PROFESSOR,
-    ADD_EXAM,
 }

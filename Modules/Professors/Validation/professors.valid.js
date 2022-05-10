@@ -1,6 +1,6 @@
-const joi = require('joi')
+const joi = require('joi');
 const strongPasswordRegex =
-    /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/
+    /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
 
 module.exports = {
     signupProfessorSchema: {
@@ -57,16 +57,4 @@ module.exports = {
             password: joi.string().required(),
         }),
     },
-    examSchema: {
-        body: joi.object().required().keys({
-            professorId: joi.string(),
-            professorName: joi.string(),
-            subjectName: joi.string().required(),
-            examScore: joi.number().required(),
-            passingScore: joi.number().required(),
-            timeInMin: joi.number().required(),
-            department: joi.string().required(),
-            level: joi.number().required(),
-        }),
-    },
-}
+};

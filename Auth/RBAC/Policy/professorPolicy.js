@@ -1,3 +1,3 @@
-const { PROFESSOR_PROFILE, ADD_EXAM } = require('../../endpoints')
+const { PROFESSOR_PROFILE } = require('../../endpoints')
 
-module.exports = [PROFESSOR_PROFILE, ADD_EXAM]
+module.exports = [PROFESSOR_PROFILE]
