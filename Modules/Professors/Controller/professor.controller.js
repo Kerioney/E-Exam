@@ -8,7 +8,7 @@ process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = 0
 const professorModel = require('../Model/professor.model')
 const examModel = require('../Model/exam.model')
 
-//Register:
+//*Register:
 let signupProfessor = async (req, res) => {
     const {
         firstName,
@@ -78,7 +78,7 @@ let verifyProfessor = async (req, res) => {
     }
 }
 
-//Login:
+//*Login:
 let loginProfessor = async (req, res) => {
     const { email, password } = req.body
     try {
@@ -107,7 +107,7 @@ let loginProfessor = async (req, res) => {
             }
         }
     } catch (error) {
-        res.status(500).json({ message: 'Something Went Wrong' })
+        res.status(500).json({ message: 'Something Went Wrong' }).log(error)
     }
 }
 
@@ -119,7 +119,7 @@ let professorProfile = async (req, res) => {
 
     res.status(200).json(profile)
 }
-//exam:
+//*Exams:
 let addExam = async (req, res) => {
     try {
         const {
@@ -130,9 +130,10 @@ let addExam = async (req, res) => {
             department,
             level,
         } = req.body
+
         const professorName = 'Dr ' + req.user.fName + req.user.lName
-        console.log(req.user)
         const professorId = req.user._id
+
         const newExam = await new examModel({
             subjectName,
             examScore,
@@ -152,6 +153,36 @@ let addExam = async (req, res) => {
         res.status(500).json({ message: 'Something Went Wrong' }).log(error)
     }
 }
+//home page for the professor:
+let showExams = async (req, res) => {
+    let exam = await examModel
+        .find({ professorId: req.user._id })
+        .select('-_id -professorId -__v')
+    res.status(200).json(exam)
+}
+
+let updateExam = async (req, res) => {
+    const {
+        subjectName,
+        examScore,
+        passingScore,
+        timeInMin,
+        department,
+        level,
+    } = req.body
+    const _id = req.params.id
+    await examModel.findByIdAndUpdate(
+        { _id },
+        { subjectName, examScore, passingScore, timeInMin, department, level }
+    )
+    res.status(200).json({ message: 'Updated' })
+}
+
+let deleteExam = async (req, res) => {
+    const _id = req.params.id
+    await examModel.findByIdAndDelete({ _id })
+    res.status(200).json({ message: 'Deleted' })
+}
 
 module.exports = {
     signupProfessor,
@@ -159,4 +190,7 @@ module.exports = {
     professorProfile,
     verifyProfessor,
     addExam,
+    showExams,
+    updateExam,
+    deleteExam,
 }
