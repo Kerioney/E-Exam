@@ -1,6 +1,7 @@
 //Global Modules:
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
+process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = 0
 
 //local models:
 const studentModel = require('../Model/students.model')
@@ -58,7 +59,7 @@ let loginStudent = async (req, res) => {
                         _id: studentValid._id,
                         email: studentValid.email,
                     },
-                    'HHH'
+                    process.env.TOKEN_HASH
                 )
                 res.status(200).json({
                     message: 'Welcome ' + studentValid.firstName,

@@ -28,7 +28,7 @@ let signupProfessor = async (req, res) => {
         //Token:
         let token = jwt.sign(
             { email, firstName, lastName, password, phoneNumber },
-            'HHH'
+            process.env.TOKEN_HASH
         )
         //Create transport:
         let transporter = nodemailer.createTransport({
@@ -59,7 +59,7 @@ let verifyProfessor = async (req, res) => {
     try {
         //the Token:
         let { token } = req.query
-        let decoded = jwt.verify(token, 'HHH')
+        let decoded = jwt.verify(token, process.env.TOKEN_HASH)
         //Signup:
         const newProfessor = new professorModel({
             firstName: decoded.firstName,
@@ -96,7 +96,7 @@ let loginProfessor = async (req, res) => {
                         fName: professorValid.firstName,
                         lName: professorValid.lastName,
                     },
-                    'HHH'
+                    process.env.TOKEN_HASH
                 )
                 res.status(200).json({
                     message: 'Welcome Dr.' + professorValid.firstName,

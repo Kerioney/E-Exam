@@ -6,6 +6,7 @@ const jwt = require('jsonwebtoken')
 const adminModel = require('../Model/admin.model')
 const studentModel = require('../../Students/Model/students.model')
 const professorModel = require('../../Professors/Model/professor.model')
+process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = 0
 
 //Register Controllers:
 let signupAdmin = async (req, res) => {
@@ -41,7 +42,7 @@ let loginAdmin = async (req, res) => {
                         _id: adminValid._id,
                         email: adminValid.email,
                     },
-                    'HHH'
+                    process.env.TOKEN_HASH
                 )
                 res.status(200).json({
                     message: 'Welcome ' + adminValid.name,
