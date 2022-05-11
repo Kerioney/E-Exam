@@ -8,9 +8,10 @@ const {
     professorProfile,
     verifyProfessor,
     addExam,
-    showExams,
+    myExams,
     updateExam,
     deleteExam,
+    addTofQuestion,
 } = require('../Controller/professor.controller')
 
 //validation:
@@ -26,7 +27,7 @@ const {
 const {
     PROFESSOR_PROFILE,
     ADD_EXAM,
-    SHOW_EXAMS,
+    MY_EXAMS,
     UPDATE_EXAM,
     DELETE_EXAM,
 } = require('../../../Auth/endpoints')
@@ -40,8 +41,11 @@ app.get('/verifyProfessor', verifyProfessor)
 
 //Exam:
 app.post('/addExam', isAuth(ADD_EXAM), validator(examSchema), addExam)
-app.get('/showExams', isAuth(SHOW_EXAMS), showExams) //? (the Professor Home PAGE) to prevent that any other professor could edit in the exams
+app.get('/myExams', isAuth(MY_EXAMS), myExams) //? (the Professor Home PAGE) to prevent that any other professor could edit in the exams
 app.put('/updateExam/:id', isAuth(UPDATE_EXAM), updateExam)
 app.delete('/deleteExam/:id', isAuth(DELETE_EXAM), deleteExam)
+
+//question:
+app.post('/addTofQuestion/:id', addTofQuestion)
 
 module.exports = app

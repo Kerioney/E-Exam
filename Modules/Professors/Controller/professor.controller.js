@@ -7,6 +7,7 @@ process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = 0
 //local models:
 const professorModel = require('../Model/professor.model')
 const examModel = require('../Model/exam.model')
+const tofModel = require('../Model/questions.model') //true or false model
 
 //*Register:
 let signupProfessor = async (req, res) => {
@@ -42,7 +43,7 @@ let signupProfessor = async (req, res) => {
         await transporter.sendMail({
             from: `${email}`,
             to: `"Fares El-Kerioney" <${process.env.USER}> `,
-            subject: ' Verify Professor',
+            subject: 'Verify Professor',
             html: `Dr. ${firstName} ${lastName} want to register with the email: ${email} 
             <br> 
             <a href='http://localhost:4200/verifyProfessor?token=${token}' target='_blank'> Click here </a>to confirm the registration`,
@@ -107,7 +108,7 @@ let loginProfessor = async (req, res) => {
             }
         }
     } catch (error) {
-        res.status(500).json({ message: 'Something Went Wrong' }).log(error)
+        res.status(500).json({ message: 'Something Went Wrong' })
     }
 }
 
@@ -150,14 +151,14 @@ let addExam = async (req, res) => {
             })
         )
     } catch (error) {
-        res.status(500).json({ message: 'Something Went Wrong' }).log(error)
+        res.status(500).json({ message: 'Something Went Wrong' })
     }
 }
 //home page for the professor:
-let showExams = async (req, res) => {
+let myExams = async (req, res) => {
     let exam = await examModel
         .find({ professorId: req.user._id })
-        .select('-_id -professorId -__v')
+        .select('_id -professorId -__v')
     res.status(200).json(exam)
 }
 
@@ -184,13 +185,35 @@ let deleteExam = async (req, res) => {
     res.status(200).json({ message: 'Deleted' })
 }
 
+//True or False Questions:
+let addTofQuestion = async (req, res) => {
+    try {
+        const { question, answers } = req.body
+        const examId = req.params.id
+
+        const newTof = await new tofModel({
+            question,
+            answers,
+            examId,
+        })
+        newTof.save().then(
+            res.status(201).json({
+                message: 'Done',
+            })
+        )
+    } catch (error) {
+        res.status(500).json({ message: 'Something Went Wrong' })
+    }
+}
+
 module.exports = {
     signupProfessor,
     loginProfessor,
     professorProfile,
     verifyProfessor,
     addExam,
-    showExams,
+    myExams,
     updateExam,
     deleteExam,
+    addTofQuestion,
 }

@@ -1,7 +1,7 @@
 const {
     PROFESSOR_PROFILE,
     ADD_EXAM,
-    SHOW_EXAMS,
+    MY_EXAMS,
     UPDATE_EXAM,
     DELETE_EXAM,
 } = require('../../endpoints')
@@ -9,7 +9,7 @@ const {
 module.exports = [
     PROFESSOR_PROFILE,
     ADD_EXAM,
-    SHOW_EXAMS,
+    MY_EXAMS,
     UPDATE_EXAM,
     DELETE_EXAM,
 ]

@@ -69,4 +69,11 @@ module.exports = {
             level: joi.number().required(),
         }),
     },
+    tofSchema: {
+        body: joi.object().required().keys({
+            examId: joi.string(),
+            questions: joi.string().required(),
+            answers: joi.required(),
+        }),
+    },
 }

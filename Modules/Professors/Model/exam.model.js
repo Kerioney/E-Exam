@@ -1,7 +1,7 @@
 //Global modules:
 const mongoose = require('mongoose')
 
-//The Schema:
+//Exam Schema:
 const examSchema = new mongoose.Schema({
     professorId: { type: mongoose.Schema.Types.ObjectId, ref: 'professors' },
     professorName: { type: String },
