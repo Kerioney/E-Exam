@@ -6,7 +6,7 @@ const studentSchema = new mongoose.Schema({
     lastName: { type: String, required: true },
     email: { type: String, required: true },
     department: { type: String, required: true },
-    academicYear: { type: Number, required: true },
+    level: { type: Number, required: true },
     phoneNumber: { type: Number, required: true },
     role: { type: String, default: 'student' },
     password: { type: String, required: true },

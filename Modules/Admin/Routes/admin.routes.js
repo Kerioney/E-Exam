@@ -46,7 +46,7 @@ const {
 //*endpoints:
 
 //Register:
-app.post('/signupAdmin', validator(signupAdminSchema), signupAdmin) // will not be used in FrontEnd
+app.post('/signupAdmin', validator(signupAdminSchema), signupAdmin) //? will not be used in FrontEnd
 app.post('/loginAdmin', validator(loginAdminSchema), loginAdmin)
 
 //Students:

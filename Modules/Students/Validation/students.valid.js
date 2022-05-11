@@ -50,7 +50,7 @@ module.exports = {
                     .messages({ 'any.only': '{{#label}} does not match' }),
                 role: joi.string(),
                 department: joi.string().required(),
-                academicYear: joi.number().required(),
+                level: joi.number().required(),
             }),
     },
     loginStudentSchema: {

@@ -7,6 +7,7 @@ const {
     signupStudent,
     loginStudent,
     studentProfile,
+    showExams,
 } = require('../Controller/students.controller')
 
 //validation:
@@ -16,13 +17,14 @@ const {
     signupStudentSchema,
     loginStudentSchema,
 } = require('../Validation/students.valid')
+
 //Auth
-//Student Auth
-const { STUDENT_PROFILE } = require('../../../Auth/endpoints')
+const { STUDENT_PROFILE, GET_EXAMS } = require('../../../Auth/endpoints')
 
 //endpoints:
 
 app.post('/signupStudent', validator(signupStudentSchema), signupStudent)
 app.post('/loginStudent', validator(loginStudentSchema), loginStudent)
 app.get('/studentProfile', isAuth(STUDENT_PROFILE), studentProfile)
+app.get('/showExams', isAuth(GET_EXAMS), showExams) //?homePage
 module.exports = app

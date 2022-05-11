@@ -1,5 +1,6 @@
 //Students Endpoints:
 const STUDENT_PROFILE = 'student:STUDENT_PROFILE'
+const GET_EXAMS = 'student:GET_EXAMS'
 
 //Professor Endpoints:
 const PROFESSOR_PROFILE = 'professor:PROFESSOR_PROFILE'
@@ -9,6 +10,7 @@ const ADD_EXAM = 'professor:ADD_EXAM'
 const SHOW_EXAMS = 'professor:SHOW_EXAMS'
 const UPDATE_EXAM = 'professor:UPDATE_EXAM'
 const DELETE_EXAM = 'professor:DELETE_EXAM'
+
 // Admin Endpoints:
 const GET_ALL_STUDENT = 'admin:GET_ALL_STUDENT'
 const GET_ALL_PROFESSOR = 'admin:GET_ALL_PROFESSOR'
@@ -28,4 +30,5 @@ module.exports = {
     SHOW_EXAMS,
     UPDATE_EXAM,
     DELETE_EXAM,
+    GET_EXAMS,
 }

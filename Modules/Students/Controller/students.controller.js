@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken')
 
 //local models:
 const studentModel = require('../Model/students.model')
-
+const examModel = require('../../../Modules/Professors/Model/exam.model')
 //Register:
 let signupStudent = async (req, res) => {
     const {
@@ -13,7 +13,7 @@ let signupStudent = async (req, res) => {
         email,
         phoneNumber,
         department,
-        academicYear,
+        level,
         password,
         confirmPassword,
     } = req.body
@@ -28,7 +28,7 @@ let signupStudent = async (req, res) => {
                 lastName,
                 email,
                 department,
-                academicYear,
+                level,
                 password,
                 phoneNumber,
             })
@@ -77,11 +77,14 @@ let loginStudent = async (req, res) => {
 let studentProfile = async (req, res) => {
     let profile = await studentModel
         .findById({ _id: req.user._id })
-        .select(
-            '-_id firstName lastName email phoneNumber department academicYear '
-        )
+        .select('-_id firstName lastName email phoneNumber department level ')
 
     res.status(200).json(profile)
 }
-
-module.exports = { signupStudent, loginStudent, studentProfile }
+//exams:
+//?Home Page:
+let showExams = async (req, res) => {
+    let exams = await examModel.find({}).select('-_id -professorId -__v')
+    res.status(200).json(exams)
+}
+module.exports = { signupStudent, loginStudent, studentProfile, showExams }
