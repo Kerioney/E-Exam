@@ -12,6 +12,9 @@ const {
     updateExam,
     deleteExam,
     addTofQuestion,
+    updateTofQuestion,
+    deleteTofQuestion,
+    showQuestions,
 } = require('../Controller/professor.controller')
 
 //validation:
@@ -46,6 +49,9 @@ app.put('/updateExam/:id', isAuth(UPDATE_EXAM), updateExam)
 app.delete('/deleteExam/:id', isAuth(DELETE_EXAM), deleteExam)
 
 //question:
-app.post('/addTofQuestion/:id', addTofQuestion)
+app.post('/addTofQuestion/:id', addTofQuestion) //id = exam Id
+app.put('/updateTofQuestion/:updateId', updateTofQuestion)
+app.delete('/deleteTofQuestion/:deleteId', deleteTofQuestion)
+app.get('/showQuestions/:id', showQuestions) //id = examId
 
 module.exports = app

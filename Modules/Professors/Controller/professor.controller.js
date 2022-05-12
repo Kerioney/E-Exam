@@ -184,8 +184,10 @@ let deleteExam = async (req, res) => {
     await examModel.findByIdAndDelete({ _id })
     res.status(200).json({ message: 'Deleted' })
 }
+//Show questions in the exam:
 
-//True or False Questions:
+//*True or False Questions:
+//add question:
 let addTofQuestion = async (req, res) => {
     try {
         const { question, answers } = req.body
@@ -206,6 +208,28 @@ let addTofQuestion = async (req, res) => {
     }
 }
 
+//update Tof question:
+let updateTofQuestion = async (req, res) => {
+    const { question, answers } = req.body
+    const updateId = req.params.updateId
+    await tofModel.findByIdAndUpdate({ _id: updateId }, { question, answers })
+    res.status(200).json({ message: 'Updated' })
+}
+
+//delete tof question:
+let deleteTofQuestion = async (req, res) => {
+    const deleteId = req.params.deleteId
+    await tofModel.findByIdAndDelete({ _id: deleteId })
+    res.status(200).json({ message: 'Deleted' })
+}
+//show questions:
+let showQuestions = async (req, res) => {
+    let examId = req.params.id
+    let question = await tofModel.find({ examId })
+    console.log(examId)
+    res.status(200).json(question)
+}
+
 module.exports = {
     signupProfessor,
     loginProfessor,
@@ -216,4 +240,7 @@ module.exports = {
     updateExam,
     deleteExam,
     addTofQuestion,
+    updateTofQuestion,
+    deleteTofQuestion,
+    showQuestions,
 }

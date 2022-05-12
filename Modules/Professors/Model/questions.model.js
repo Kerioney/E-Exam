@@ -1,8 +1,5 @@
 //Global modules:
-const text = require('body-parser/lib/types/text')
-const { boolean } = require('joi')
 const mongoose = require('mongoose')
-const examModel = require('./exam.model')
 
 //True or False Schema
 const tofSchema = new mongoose.Schema({
@@ -22,7 +19,7 @@ const tofSchema = new mongoose.Schema({
         },
     ],
 })
-
+//The model:
 const tofModel = mongoose.model('tof', tofSchema)
 
 module.exports = tofModel
