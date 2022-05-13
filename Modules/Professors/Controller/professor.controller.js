@@ -119,8 +119,6 @@ let professorProfile = async (req, res) => {
 
     res.status(200).json(profile)
 }
-//Show questions in the exam:
-
 //*True or False Questions:
 //add question:
 let addTofQuestion = async (req, res) => {
