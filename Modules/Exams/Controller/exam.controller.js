@@ -16,7 +16,7 @@ let addExam = async (req, res) => {
             level,
         } = req.body
 
-        const professorName = 'Dr ' + req.user.fName + req.user.lName
+        const professorName = 'Dr ' + req.user.fName + ' ' + req.user.lName
         const professorId = req.user._id
 
         const newExam = await new examModel({
@@ -43,7 +43,7 @@ let addExam = async (req, res) => {
 let myExams = async (req, res) => {
     let exam = await examModel
         .find({ professorId: req.user._id })
-        .select('_id -professorId -__v')
+        .select('_id -professorId -__v -results._id')
     res.status(200).json(exam)
 }
 
@@ -69,10 +69,47 @@ let deleteExam = async (req, res) => {
     await examModel.findByIdAndDelete({ _id })
     res.status(200).json({ message: 'Deleted' })
 }
-
+////Under Construction:
+let getResult = async (req, res) => {
+    let result = 500 //?result  from the front end
+    let examName = req.params.examName
+    let studentId = req.user._id
+    let examId = req.params.id
+    let studentName = req.user.name
+    //insert into the student Profile
+    await studentModel.findByIdAndUpdate(
+        { _id: studentId },
+        {
+            $push: {
+                perviousExams: [
+                    {
+                        examName,
+                        result,
+                    },
+                ],
+            },
+        }
+    )
+    // insert into the exam profile :
+    await examModel.findByIdAndUpdate(
+        { _id: examId },
+        {
+            $push: {
+                results: [
+                    {
+                        studentName,
+                        result,
+                    },
+                ],
+            },
+        }
+    )
+    res.status(200).json({ examName, studentName, result })
+}
 module.exports = {
     addExam,
     myExams,
     updateExam,
     deleteExam,
+    getResult,
 }

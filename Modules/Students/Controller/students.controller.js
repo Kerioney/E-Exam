@@ -57,6 +57,7 @@ let loginStudent = async (req, res) => {
                 let token = jwt.sign(
                     {
                         _id: studentValid._id,
+                        name: studentValid.firstName + studentValid.lastName,
                         role: studentValid.role,
                         email: studentValid.email,
                         level: studentValid.level,
@@ -89,36 +90,15 @@ let studentProfile = async (req, res) => {
 let showExams = async (req, res) => {
     let level = req.user.level
     //We won't show exams by department because there is a common subjects
-    let exams = await examModel.find({ level }).select('-_id -professorId -__v')
+    let exams = await examModel
+        .find({ level })
+        .select('-_id -professorId -__v -result')
     res.status(200).json(exams)
 }
 
-////Under Construction:
-let getResult = async (req, res) => {
-    let result = 500 //?result  from the front end
-    let examName = req.params.examName
-    let id = req.user._id
-    //insert into the student Profile
-    await studentModel.findByIdAndUpdate(
-        { _id: id },
-        {
-            $push: {
-                perviousExams: [
-                    {
-                        examName,
-                        result,
-                    },
-                ],
-            },
-        }
-    )
-    // insert into the exam profile :
-    res.status(200).json({ result, examName })
-}
 module.exports = {
     signupStudent,
     loginStudent,
     studentProfile,
     showExams,
-    getResult,
 }

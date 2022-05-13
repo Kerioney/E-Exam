@@ -11,6 +11,12 @@ const examSchema = new mongoose.Schema({
     examScore: { type: Number, required: true },
     passingScore: { type: Number, required: true },
     timeInMin: { type: Number, required: true },
+    results: [
+        {
+            studentName: { type: String },
+            result: { type: Number },
+        },
+    ],
 })
 
 //create the model:

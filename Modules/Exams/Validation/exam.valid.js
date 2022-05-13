@@ -10,6 +10,7 @@ module.exports = {
             timeInMin: joi.number().required(),
             department: joi.string().required(),
             level: joi.number().required(),
+            results: joi.array(),
         }),
     },
 }
