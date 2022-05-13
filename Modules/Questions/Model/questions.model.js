@@ -2,12 +2,12 @@
 const mongoose = require('mongoose')
 
 //True or False Schema
-const tofSchema = new mongoose.Schema({
+const questionSchema = new mongoose.Schema({
     examId: { type: mongoose.Schema.Types.ObjectId, ref: 'exams' },
     question: { type: String, required: true },
     answers: [
         {
-            text: {
+            option: {
                 type: String,
                 required: true,
             },
@@ -21,6 +21,6 @@ const tofSchema = new mongoose.Schema({
 })
 
 //The model:
-const tofModel = mongoose.model('tof', tofSchema)
+const questionModel = mongoose.model('Question', questionSchema)
 
-module.exports = tofModel
+module.exports = questionModel

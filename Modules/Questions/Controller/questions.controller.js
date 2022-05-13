@@ -1,28 +1,27 @@
 //local models:
-const tofModel = require('../Model/questions.model') //true or false model
+const questionModel = require('../Model/questions.model') //true or false model
 
-//*True or False Questions:
-
+//Controllers:
 //show questions:
 //?home page of the exam
 let showQuestions = async (req, res) => {
     let examId = req.params.id
-    let question = await tofModel.find({ examId })
+    let question = await questionModel.find({ examId }).select('-__v -examId')
     res.status(200).json(question)
 }
 
 //add question:
-let addTofQuestion = async (req, res) => {
+let addQuestion = async (req, res) => {
     try {
         const { question, answers } = req.body
         const examId = req.params.id
 
-        const newTof = await new tofModel({
+        const newQuestion = await new questionModel({
             question,
             answers,
             examId,
         })
-        newTof.save().then(
+        newQuestion.save().then(
             res.status(201).json({
                 message: 'Done',
             })
@@ -33,23 +32,26 @@ let addTofQuestion = async (req, res) => {
 }
 
 //update question:
-let updateTofQuestion = async (req, res) => {
+let updateQuestion = async (req, res) => {
     const { question, answers } = req.body
     const updateId = req.params.updateId
-    await tofModel.findByIdAndUpdate({ _id: updateId }, { question, answers })
+    await questionModel.findByIdAndUpdate(
+        { _id: updateId },
+        { question, answers }
+    )
     res.status(200).json({ message: 'Updated' })
 }
 
 //delete question:
-let deleteTofQuestion = async (req, res) => {
+let deleteQuestion = async (req, res) => {
     const deleteId = req.params.deleteId
-    await tofModel.findByIdAndDelete({ _id: deleteId })
+    await questionModel.findByIdAndDelete({ _id: deleteId })
     res.status(200).json({ message: 'Deleted' })
 }
 
 module.exports = {
-    addTofQuestion,
-    updateTofQuestion,
-    deleteTofQuestion,
+    addQuestion,
+    updateQuestion,
+    deleteQuestion,
     showQuestions,
 }

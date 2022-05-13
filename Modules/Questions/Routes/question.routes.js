@@ -3,9 +3,9 @@ const app = require('express').Router()
 
 //Controllers:
 const {
-    addTofQuestion,
-    updateTofQuestion,
-    deleteTofQuestion,
+    addQuestion,
+    updateQuestion,
+    deleteQuestion,
     showQuestions,
 } = require('../Controller/questions.controller')
 
@@ -22,24 +22,16 @@ const {
 } = require('../../../Auth/endpoints')
 
 //*endpoints:
-//true or false:
+
+app.get('/showQuestions/:id', showQuestions) //id = exam Id
 app.post(
-    '/addTofQuestion/:id', //id = exam Id
+    '/addQuestion/:id', //id = exam Id
     isAuth(ADD_QUESTIONS),
     validator(tofSchema),
-    addTofQuestion
+    addQuestion
 )
-app.put(
-    '/updateTofQuestion/:updateId',
-    isAuth(UPDATE_QUESTION),
-    updateTofQuestion
-)
-app.delete(
-    '/deleteTofQuestion/:deleteId',
-    isAuth(DELETE_QUESTION),
-    deleteTofQuestion
-)
-app.get('/showQuestions/:id', showQuestions) //id = exam Id
+app.put('/updateQuestion/:updateId', isAuth(UPDATE_QUESTION), updateQuestion)
+app.delete('/deleteQuestion/:deleteId', isAuth(DELETE_QUESTION), deleteQuestion)
 //? ShowQuestions isn't authorized because the student will have access too
 
 module.exports = app
