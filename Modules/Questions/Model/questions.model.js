@@ -1,7 +1,7 @@
 //Global modules:
 const mongoose = require('mongoose')
 
-//True or False Schema
+//Question Schema
 const questionSchema = new mongoose.Schema({
     examId: { type: mongoose.Schema.Types.ObjectId, ref: 'exams' },
     question: { type: String, required: true },
