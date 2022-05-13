@@ -20,7 +20,7 @@ let signupAdmin = async (req, res) => {
 
             await newAdmin
                 .save()
-                .then(res.status(200).json({ message: 'added' }))
+                .then(res.status(201).json({ message: 'added' }))
         }
     } catch (error) {
         res.status(500).json({ message: 'something went wrong' })
@@ -85,7 +85,7 @@ let updateStudents = async (req, res) => {
 let deleteStudent = async (req, res) => {
     const id = req.params._id
     await studentModel.findByIdAndDelete({ _id: id })
-    res.status(200).json({ message: 'Deleted' })
+    res.status(204).json({ message: 'Deleted' })
 }
 
 //Professor Controllers:

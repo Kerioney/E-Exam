@@ -5,7 +5,7 @@ process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = 0
 
 //local models:
 const studentModel = require('../Model/students.model')
-const examModel = require('../../../Modules/Professors/Model/exam.model')
+const examModel = require('../../Exams/Model/exam.model')
 //Register:
 let signupStudent = async (req, res) => {
     const {
