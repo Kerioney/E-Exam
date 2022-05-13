@@ -6,6 +6,7 @@ process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = 0
 //local models:
 const studentModel = require('../Model/students.model')
 const examModel = require('../../Exams/Model/exam.model')
+
 //Register:
 let signupStudent = async (req, res) => {
     const {
@@ -55,9 +56,10 @@ let loginStudent = async (req, res) => {
             if (match) {
                 let token = jwt.sign(
                     {
-                        role: studentValid.role,
                         _id: studentValid._id,
+                        role: studentValid.role,
                         email: studentValid.email,
+                        level: studentValid.level,
                     },
                     process.env.TOKEN_HASH
                 )
@@ -85,7 +87,10 @@ let studentProfile = async (req, res) => {
 //exams:
 //?Home Page:
 let showExams = async (req, res) => {
-    let exams = await examModel.find({}).select('-_id -professorId -__v')
+    let level = req.user.level
+    //We won't show exams by department because there is a common subjects
+    let exams = await examModel.find({ level }).select('-_id -professorId -__v')
     res.status(200).json(exams)
 }
+
 module.exports = { signupStudent, loginStudent, studentProfile, showExams }
