@@ -4,6 +4,9 @@ const {
     MY_EXAMS,
     UPDATE_EXAM,
     DELETE_EXAM,
+    ADD_QUESTIONS,
+    UPDATE_QUESTION,
+    DELETE_QUESTION,
 } = require('../../endpoints')
 
 module.exports = [
@@ -12,4 +15,7 @@ module.exports = [
     MY_EXAMS,
     UPDATE_EXAM,
     DELETE_EXAM,
+    ADD_QUESTIONS,
+    UPDATE_QUESTION,
+    DELETE_QUESTION,
 ]

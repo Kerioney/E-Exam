@@ -8,7 +8,7 @@ const studentModel = require('../../Students/Model/students.model')
 const professorModel = require('../../Professors/Model/professor.model')
 process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = 0
 
-//Register Controllers:
+//*Register Controllers:
 let signupAdmin = async (req, res) => {
     const { name, email, password, confirmPassword } = req.body
     try {
@@ -88,7 +88,7 @@ let deleteStudent = async (req, res) => {
     res.status(204).json({ message: 'Deleted' })
 }
 
-//Professor Controllers:
+//*Professor Controllers:
 let getAllProfessor = async (req, res) => {
     let professors = await professorModel
         .find({})

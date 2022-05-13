@@ -57,12 +57,4 @@ module.exports = {
             password: joi.string().required(),
         }),
     },
-
-    tofSchema: {
-        body: joi.object().required().keys({
-            examId: joi.string(),
-            questions: joi.string().required(),
-            answers: joi.required(),
-        }),
-    },
 }

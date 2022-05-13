@@ -6,7 +6,6 @@ const nodemailer = require('nodemailer')
 
 //local models:
 const professorModel = require('../Model/professor.model')
-const tofModel = require('../Model/questions.model') //true or false model
 
 //*Register:
 let signupProfessor = async (req, res) => {
@@ -119,57 +118,10 @@ let professorProfile = async (req, res) => {
 
     res.status(200).json(profile)
 }
-//*True or False Questions:
-//add question:
-let addTofQuestion = async (req, res) => {
-    try {
-        const { question, answers } = req.body
-        const examId = req.params.id
-
-        const newTof = await new tofModel({
-            question,
-            answers,
-            examId,
-        })
-        newTof.save().then(
-            res.status(201).json({
-                message: 'Done',
-            })
-        )
-    } catch (error) {
-        res.status(500).json({ message: 'Something Went Wrong' })
-    }
-}
-
-//update Tof question:
-let updateTofQuestion = async (req, res) => {
-    const { question, answers } = req.body
-    const updateId = req.params.updateId
-    await tofModel.findByIdAndUpdate({ _id: updateId }, { question, answers })
-    res.status(200).json({ message: 'Updated' })
-}
-
-//delete tof question:
-let deleteTofQuestion = async (req, res) => {
-    const deleteId = req.params.deleteId
-    await tofModel.findByIdAndDelete({ _id: deleteId })
-    res.status(200).json({ message: 'Deleted' })
-}
-//show questions:
-let showQuestions = async (req, res) => {
-    let examId = req.params.id
-    let question = await tofModel.find({ examId })
-
-    res.status(200).json(question)
-}
 
 module.exports = {
     signupProfessor,
     loginProfessor,
     professorProfile,
     verifyProfessor,
-    addTofQuestion,
-    updateTofQuestion,
-    deleteTofQuestion,
-    showQuestions,
 }

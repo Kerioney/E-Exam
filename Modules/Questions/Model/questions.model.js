@@ -19,6 +19,7 @@ const tofSchema = new mongoose.Schema({
         },
     ],
 })
+
 //The model:
 const tofModel = mongoose.model('tof', tofSchema)
 
