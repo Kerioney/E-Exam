@@ -6,7 +6,9 @@ const questionModel = require('../Model/questions.model') //true or false model
 //?home page of the exam
 let showQuestions = async (req, res) => {
     let examId = req.params.id
-    let question = await questionModel.find({ examId }).select('-__v -examId')
+    let question = await questionModel
+        .find({ examId })
+        .select('-__v -examId -answers._id')
     res.status(200).json(question)
 }
 

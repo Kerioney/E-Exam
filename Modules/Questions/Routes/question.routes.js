@@ -11,7 +11,7 @@ const {
 
 //validation:
 const validator = require('../../../Common/common.valid')
-const { tofSchema } = require('../Validation/questions.valid')
+const { questionSchema } = require('../Validation/questions.valid')
 
 //Auth:
 const isAuth = require('../../../Common/common.isAuth')
@@ -27,7 +27,7 @@ app.get('/showQuestions/:id', showQuestions) //id = exam Id
 app.post(
     '/addQuestion/:id', //id = exam Id
     isAuth(ADD_QUESTIONS),
-    validator(tofSchema),
+    validator(questionSchema),
     addQuestion
 )
 app.put('/updateQuestion/:updateId', isAuth(UPDATE_QUESTION), updateQuestion)
