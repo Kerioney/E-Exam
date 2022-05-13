@@ -1,6 +1,7 @@
 //Students Endpoints:
 const STUDENT_PROFILE = 'student:STUDENT_PROFILE'
 const GET_EXAMS = 'student:GET_EXAMS'
+const GET_RESULT = 'student:GET_RESULT'
 
 //Professor Endpoints:
 const PROFESSOR_PROFILE = 'professor:PROFESSOR_PROFILE'
@@ -37,4 +38,5 @@ module.exports = {
     ADD_QUESTIONS,
     UPDATE_QUESTION,
     DELETE_QUESTION,
+    GET_RESULT,
 }

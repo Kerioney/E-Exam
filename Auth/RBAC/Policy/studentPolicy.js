@@ -1,3 +1,3 @@
-const { STUDENT_PROFILE, GET_EXAMS } = require('../../endpoints')
+const { STUDENT_PROFILE, GET_EXAMS, GET_RESULT } = require('../../endpoints')
 
-module.exports = [STUDENT_PROFILE, GET_EXAMS]
+module.exports = [STUDENT_PROFILE, GET_EXAMS, GET_RESULT]

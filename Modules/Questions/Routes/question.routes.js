@@ -23,7 +23,7 @@ const {
 
 //*endpoints:
 
-app.get('/showQuestions/:id', showQuestions) //id = exam Id
+app.get('/showQuestions/:examName/:id', showQuestions) //id = exam Id
 app.post(
     '/addQuestion/:id', //id = exam Id
     isAuth(ADD_QUESTIONS),

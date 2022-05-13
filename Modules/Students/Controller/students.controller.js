@@ -1,7 +1,7 @@
 //Global Modules:
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
-process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = 0
+// process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = 0
 
 //local models:
 const studentModel = require('../Model/students.model')
@@ -80,7 +80,7 @@ let loginStudent = async (req, res) => {
 let studentProfile = async (req, res) => {
     let profile = await studentModel
         .findById({ _id: req.user._id })
-        .select('-_id firstName lastName email phoneNumber department level ')
+        .select('-_id -password -__v -perviousExams._id')
 
     res.status(200).json(profile)
 }
@@ -93,4 +93,32 @@ let showExams = async (req, res) => {
     res.status(200).json(exams)
 }
 
-module.exports = { signupStudent, loginStudent, studentProfile, showExams }
+////Under Construction:
+let getResult = async (req, res) => {
+    let result = 500 //?result  from the front end
+    let examName = req.params.examName
+    let id = req.user._id
+    //insert into the student Profile
+    await studentModel.findByIdAndUpdate(
+        { _id: id },
+        {
+            $push: {
+                perviousExams: [
+                    {
+                        examName,
+                        result,
+                    },
+                ],
+            },
+        }
+    )
+    // insert into the exam profile :
+    res.status(200).json({ result, examName })
+}
+module.exports = {
+    signupStudent,
+    loginStudent,
+    studentProfile,
+    showExams,
+    getResult,
+}

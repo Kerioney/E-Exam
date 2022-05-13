@@ -10,10 +10,15 @@ const studentSchema = new mongoose.Schema({
     phoneNumber: { type: Number, required: true },
     role: { type: String, default: 'student' },
     password: { type: String, required: true },
+    perviousExams: [
+        {
+            examName: { type: String },
+            result: { type: Number },
+        },
+    ],
 })
 
 studentSchema.pre('save', async function (next) {
-    //save is the name of the method that will do the change before it
     this.password = await bcrypt.hash(this.password, 5)
 })
 const studentModel = mongoose.model('Student', studentSchema)

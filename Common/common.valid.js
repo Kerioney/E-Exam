@@ -11,7 +11,6 @@ module.exports = (schema) => {
         }
         if (validation.length) {
             res.status(StatusCodes.BAD_REQUEST)
-            //to change the status value in the postman
             res.json({
                 message: validation.join(),
                 //join take the array and turn it into string

@@ -1,15 +1,17 @@
 //local models:
-const questionModel = require('../Model/questions.model') //true or false model
+const questionModel = require('../Model/questions.model')
 
 //Controllers:
 //show questions:
 //?home page of the exam
 let showQuestions = async (req, res) => {
     let examId = req.params.id
+    let examName = req.params.examName
+
     let question = await questionModel
         .find({ examId })
         .select('-__v -examId -answers._id')
-    res.status(200).json(question)
+    res.status(200).json({ examName, question })
 }
 
 //add question:

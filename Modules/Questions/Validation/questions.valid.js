@@ -4,7 +4,7 @@ module.exports = {
         body: joi.object().required().keys({
             examId: joi.string(),
             question: joi.string().required(),
-            answers: joi.required(),
+            answers: joi.array().required(),
         }),
     },
 }

@@ -51,6 +51,7 @@ module.exports = {
                 role: joi.string(),
                 department: joi.string().required(),
                 level: joi.number().required(),
+                perviousExams: joi.array(),
             }),
     },
     loginStudentSchema: {
