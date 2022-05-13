@@ -20,6 +20,7 @@ const DELETE_STUDENT = 'admin:DELETE_STUDENT'
 const GET_ALL_PROFESSOR = 'admin:GET_ALL_PROFESSOR'
 const UPDATE_PROFESSOR = 'admin:UPDATE_PROFESSOR'
 const DELETE_PROFESSOR = 'admin:DELETE_PROFESSOR'
+const GET_ALL_EXAMS = 'admin:GET_ALL_EXAMS'
 
 module.exports = {
     STUDENT_PROFILE,
@@ -39,4 +40,5 @@ module.exports = {
     UPDATE_QUESTION,
     DELETE_QUESTION,
     GET_RESULT,
+    GET_ALL_EXAMS,
 }

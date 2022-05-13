@@ -6,6 +6,7 @@ const jwt = require('jsonwebtoken')
 const adminModel = require('../Model/admin.model')
 const studentModel = require('../../Students/Model/students.model')
 const professorModel = require('../../Professors/Model/professor.model')
+const examModel = require('../../Exams/Model/exam.model')
 process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = 0
 
 //*Register Controllers:
@@ -111,6 +112,12 @@ let deleteProfessor = async (req, res) => {
     res.status(200).json({ message: 'Deleted' })
 }
 
+//Exam:
+let getAllExams = async (req, res) => {
+    let exams = await examModel.find()
+    res.status(200).json(exams)
+}
+
 module.exports = {
     signupAdmin,
     loginAdmin,
@@ -120,4 +127,5 @@ module.exports = {
     getAllProfessor,
     updateProfessor,
     deleteProfessor,
+    getAllExams,
 }

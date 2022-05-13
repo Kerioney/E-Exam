@@ -20,6 +20,9 @@ const {
     deleteProfessor,
 } = require('../Controller/admin.controls')
 
+//Exams:
+const { getAllExams } = require('../Controller/admin.controls')
+
 //*validation:
 const validator = require('../../../Common/common.valid')
 const {
@@ -43,6 +46,9 @@ const {
     DELETE_PROFESSOR,
 } = require('../../../Auth/endpoints')
 
+//Exams:
+const { GET_ALL_EXAMS } = require('../../../Auth/endpoints')
+
 //*endpoints:
 
 //Register:
@@ -58,5 +64,8 @@ app.delete('/deleteStudent/:_id', isAuth(DELETE_STUDENT), deleteStudent)
 app.get('/getAllProfessor', isAuth(GET_ALL_PROFESSOR), getAllProfessor)
 app.put('/updateProfessor/:_id', isAuth(UPDATE_PROFESSOR), updateProfessor)
 app.delete('/deleteProfessor/:_id', isAuth(DELETE_PROFESSOR), deleteProfessor)
+
+//Exams:
+app.get('/getAllExams', isAuth(GET_ALL_EXAMS), getAllExams)
 
 module.exports = app

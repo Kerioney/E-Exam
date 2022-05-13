@@ -5,6 +5,7 @@ const {
     GET_ALL_PROFESSOR,
     UPDATE_PROFESSOR,
     DELETE_PROFESSOR,
+    GET_ALL_EXAMS,
 } = require('../../endpoints')
 
 module.exports = [
@@ -14,4 +15,5 @@ module.exports = [
     DELETE_STUDENT,
     UPDATE_PROFESSOR,
     DELETE_PROFESSOR,
+    GET_ALL_EXAMS,
 ]
