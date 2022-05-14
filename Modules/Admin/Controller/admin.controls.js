@@ -117,7 +117,7 @@ let getAllExams = async (req, res) => {
     let exams = await examModel.find()
     res.status(200).json(exams)
 }
-
+//?Admin have all the Auth to update and delete the Exams like the professor
 module.exports = {
     signupAdmin,
     loginAdmin,

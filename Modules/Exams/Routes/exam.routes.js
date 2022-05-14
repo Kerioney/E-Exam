@@ -28,8 +28,8 @@ const {
 //Exam:
 app.post('/addExam', isAuth(ADD_EXAM), validator(examSchema), addExam)
 app.get('/myExams', isAuth(MY_EXAMS), myExams) //? (the Professor Home PAGE) to prevent that any other professor could edit in the exams
-app.put('/updateExam/:id', isAuth(UPDATE_EXAM), updateExam)
-app.delete('/deleteExam/:id', isAuth(DELETE_EXAM), deleteExam)
+app.put('/updateExam/:id', isAuth(UPDATE_EXAM), updateExam) ///admin and professor
+app.delete('/deleteExam/:id', isAuth(DELETE_EXAM), deleteExam) ///admin and professor
 app.get('/getResult/:examName/:id', isAuth(GET_RESULT), getResult)
 
 module.exports = app
