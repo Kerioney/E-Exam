@@ -15,7 +15,7 @@ const studentSchema = new mongoose.Schema({
             examName: { type: String },
             result: { type: Number },
         },
-    ],
+    ], //Will not be append in the student Signup
 })
 
 studentSchema.pre('save', async function (next) {

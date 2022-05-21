@@ -71,11 +71,12 @@ let deleteExam = async (req, res) => {
 }
 ////Under Construction:
 let getResult = async (req, res) => {
-    let result = 500 //?result  from the front end
+    let result = req.headers.result //?result from the front end
     let examName = req.params.examName
     let studentId = req.user._id
     let examId = req.params.id
     let studentName = req.user.name
+
     //insert into the student Profile
     await studentModel.findByIdAndUpdate(
         { _id: studentId },
@@ -90,7 +91,7 @@ let getResult = async (req, res) => {
             },
         }
     )
-    // insert into the exam profile :
+    //insert into the exam profile :
     await examModel.findByIdAndUpdate(
         { _id: examId },
         {
