@@ -15,15 +15,17 @@ const Questions = require('./Modules/Questions/Routes/question.routes')
 //middleware:
 app.use(bp.json())
 app.use(bp.urlencoded({ extended: false }))
+app.use(cors())
 app.use(Students)
 app.use(Professors)
 app.use(Admin)
 app.use(Exams)
 app.use(Questions)
-app.use(cors())
 
 app.get('/', (req, res) => res.send('Api is working....'))
-app.listen(process.env.PORT, () => console.log(`Server is running ........`))
+app.listen(process.env.PORT, () =>
+    console.log(`Server is running on Port ${process.env.PORT} ........`)
+)
 
 connection() //db Connection
 require('dotenv').config() //.env

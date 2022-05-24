@@ -44,7 +44,7 @@ let signupProfessor = async (req, res) => {
             subject: 'Verify Professor',
             html: `Dr. ${firstName} ${lastName} want to register with the email: ${email} 
             <br> 
-            <a href='http://localhost:4200/verifyProfessor?token=${token}' target='_blank'> Click here </a>to confirm the registration`,
+            <a href='http://localhost:4100/verifyProfessor?token=${token}' target='_blank'> Click here </a>to confirm the registration`,
         })
 
         res.status(202).json({
