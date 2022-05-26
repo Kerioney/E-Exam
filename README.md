@@ -1,8 +1,5 @@
 # E-Exam 
-E-Exam is a System for students to get their exams online.
-The admin is responsible for adding and editing (subjects , professors and Students) and make an approval for the professors 
-Professors prepare for their subjects' exams with adding and editing questions and identifying the correct answer.
-Students take the exam and the results are stored to be shown for the student and professor.
+E-Exam is a System for students to get their exams online. The admin is responsible for adding and editing (subjects, professors and Students) and making approval for the professors. Professors prepare for their subjects' exams by adding and editing questions and identifying the correct answer. Students take the exam and the results are stored to be shown to the student and professor.
 
 # Types of Users
 1. Admin: is basically a professor with Administrating Authentications.
