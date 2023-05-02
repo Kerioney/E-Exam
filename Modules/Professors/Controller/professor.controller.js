@@ -1,11 +1,11 @@
 //Global Modules:
-const bcrypt = require('bcrypt')
-const jwt = require('jsonwebtoken')
-const nodemailer = require('nodemailer')
+const bcrypt = require("bcrypt")
+const jwt = require("jsonwebtoken")
+const nodemailer = require("nodemailer")
 // process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = 0
 
 //local models:
-const professorModel = require('../Model/professor.model')
+const professorModel = require("../Model/professor.model")
 
 //*Register:
 let signupProfessor = async (req, res) => {
@@ -22,7 +22,7 @@ let signupProfessor = async (req, res) => {
     let professor = await professorModel.findOne({ email })
 
     if (professor) {
-        res.status(400).json({ message: 'The email is already exist' })
+        res.status(400).json({ message: "The email is already exist" })
     } else {
         //Token:
         let token = jwt.sign(
@@ -31,7 +31,7 @@ let signupProfessor = async (req, res) => {
         )
         //Create transport:
         let transporter = nodemailer.createTransport({
-            service: 'gmail',
+            service: "gmail",
             auth: {
                 user: process.env.USER,
                 pass: process.env.PASS,
@@ -41,7 +41,7 @@ let signupProfessor = async (req, res) => {
         await transporter.sendMail({
             from: `${email}`,
             to: `"Fares El-Kerioney" <${process.env.USER}> `,
-            subject: 'Verify Professor',
+            subject: "Verify Professor",
             html: `Dr. ${firstName} ${lastName} want to register with the email: ${email} 
             <br> 
             <a href='http://localhost:4200/verifyProfessor?token=${token}' target='_blank'> Click here </a>to confirm the registration`,
@@ -69,11 +69,11 @@ let verifyProfessor = async (req, res) => {
         })
         await newProfessor.save().then(
             res.status(201).json({
-                message: 'The professor registration is completed',
+                message: "The professor registration is completed",
             })
         )
     } catch (error) {
-        res.status(500).json({ message: 'something went wrong' })
+        res.status(500).json({ message: "something went wrong" })
     }
 }
 
@@ -98,15 +98,15 @@ let loginProfessor = async (req, res) => {
                     process.env.TOKEN_HASH
                 )
                 res.status(200).json({
-                    message: 'Welcome Dr.' + professorValid.firstName,
+                    message: "Welcome Dr." + professorValid.firstName,
                     token,
                 })
             } else {
-                res.status(422).json({ message: 'Wrong Password' })
+                res.status(422).json({ message: "Wrong Password" })
             }
         }
     } catch (error) {
-        res.status(500).json({ message: 'Something Went Wrong' })
+        res.status(500).json({ message: "Something Went Wrong" })
     }
 }
 
@@ -114,7 +114,7 @@ let loginProfessor = async (req, res) => {
 let professorProfile = async (req, res) => {
     let profile = await professorModel
         .findById({ _id: req.user._id })
-        .select('-_id firstName lastName email phoneNumber')
+        .select("-_id firstName lastName email phoneNumber")
 
     res.status(200).json(profile)
 }
